@@ -22,6 +22,9 @@ public interface TimeDao {
     @Query("SELECT * FROM Future")
     List<Future> getSituationByIdFuture();
 
+    @Query("SELECT * FROM Save")
+    List<Save> getCurSaveId();
+
     @Update
     void update(Save save);
 }

@@ -21,11 +21,11 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/b_start"
         android:layout_width="172dp"
         android:layout_height="73dp"
         android:background="@drawable/button1"
-        android:text="Button"
+        android:text="Начать игру"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
@@ -34,31 +34,31 @@
         app:layout_constraintVertical_bias="0.331" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/b_contin"
         android:layout_width="172dp"
         android:layout_height="73dp"
         android:layout_marginBottom="136dp"
         android:background="@drawable/button1"
-        android:text="Button"
+        android:text="Продолжить"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/b_start"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/b_exit"
         android:layout_width="172dp"
         android:layout_height="73dp"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="56dp"
         android:background="@drawable/button1"
-        android:text="Button"
+        android:text="Выход"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/b_contin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
