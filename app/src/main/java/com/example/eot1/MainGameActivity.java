@@ -125,7 +125,7 @@ public class MainGameActivity extends AppCompatActivity {
 
                             choice1.setClickable(true);
                         }
-                    }, 1500);
+                    }, 850);
 
                     choice2.setVisibility(View.INVISIBLE);
                     choice2.setClickable(false);
@@ -155,7 +155,7 @@ public class MainGameActivity extends AppCompatActivity {
 
                             choice2.setClickable(true);
                         }
-                    }, 1500);
+                    }, 850);
 
                     choice1.setVisibility(View.INVISIBLE);
                     choice1.setClickable(false);
@@ -190,7 +190,7 @@ public class MainGameActivity extends AppCompatActivity {
 
                             choice1.setClickable(true);
                         }
-                    }, 1500);
+                    }, 850);
 
                     choice1t.startAnimation(anim_ext);
 
@@ -217,7 +217,7 @@ public class MainGameActivity extends AppCompatActivity {
 
                             choice2.setClickable(true);
                         }
-                    }, 1500);
+                    }, 850);
                     situation.startAnimation(anim_ext);
 
                     choice2t.startAnimation(anim_ext);

@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955"
+        app:layout_constraintVertical_bias="0.088"
         tools:ignore="SpeakableTextPresentCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.292" />
 
     <Button
         android:id="@+id/b_contin"
@@ -59,6 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_contin" />
+        app:layout_constraintTop_toBottomOf="@+id/b_contin"
+        app:layout_constraintVertical_bias="0.294" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
