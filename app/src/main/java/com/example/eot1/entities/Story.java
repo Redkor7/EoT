@@ -1,12 +1,11 @@
 package com.example.eot1.entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Past")
-public class Past {
+@Entity(tableName = "Story")
+public class Story {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -17,6 +16,7 @@ public class Past {
     public String choice1;
 
     @ColumnInfo(name = "choice2")
+
     public String choice2;
 
     @ColumnInfo(name = "implications1")
@@ -24,4 +24,7 @@ public class Past {
 
     @ColumnInfo(name = "implications2")
     public String implications2;
+
+    @ColumnInfo(name = "time")
+    public String time;
 }
