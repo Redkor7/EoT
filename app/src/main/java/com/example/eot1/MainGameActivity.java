@@ -3,6 +3,8 @@ package com.example.eot1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,16 +21,13 @@ public class MainGameActivity extends AppCompatActivity {
 
     ImageButton choice1, choice2;
     TextView situation, choice1t, choice2t, hp;
-
+    String endOrDeatht;
     Animation anim_emer, anim_ext;
-
     Save save = new Save();
-
-    Integer id = 1, flag = 0;
-
+    Integer id, flag = 0;
     Handler handler = new Handler();
-
     MyDatabase db;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +45,18 @@ public class MainGameActivity extends AppCompatActivity {
         choice2t = findViewById(R.id.choice2t);
         hp = findViewById(R.id.hp);
 
+        intent = new Intent(this, EndOrDeath.class);
+
         db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
                 .createFromAsset("databases/base8.db")
                 .allowMainThreadQueries()
                 .build();
 
-        save.cur_id = 3;
+        id = db.userDao().getCurSaveId().get(0).cur_id;
+        save.cur_id = db.userDao().getCurSaveId().get(0).cur_id;
         save.id = 1;
-        save.HP = 5;
-
-        // db.userDao().update(save);
+        save.HP = db.userDao().getCurSaveId().get(0).HP;
+        hp.setText(db.userDao().getCurSaveId().get(0).HP.toString() + "x");
 
         situation.setText(db.userDao().getSituationById().get(id - 1).situation);
         choice1t.setText(db.userDao().getSituationById().get(id - 1).choice1);
@@ -64,23 +65,30 @@ public class MainGameActivity extends AppCompatActivity {
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (flag == 0)
+                if (flag == 0) {
+                    ChangeHP(choice1);
                     ChangesStart(choice1);
-                else
+                    EndOrDeath(choice1);
+                } else {
                     ChangesEnd(choice1);
-                //        hp.setText(db.userDao().getCurSaveId().get(0).HP.toString());
+                    save.cur_id = id;
+                    db.userDao().update(save);
+                }
             }
         });
 
         choice2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (flag == 0)
+                if (flag == 0) {
+                    ChangeHP(choice2);
                     ChangesStart(choice2);
-                else {
+                    EndOrDeath(choice2);
+                } else {
                     ChangesEnd(choice2);
+                    save.cur_id = id;
+                    db.userDao().update(save);
                 }
-                //             hp.setText(id.toString());
             }
         });
 
@@ -110,6 +118,8 @@ public class MainGameActivity extends AppCompatActivity {
                 choice2t.startAnimation(anim_ext);
                 choice2t.setVisibility(View.INVISIBLE);
 
+                hp.setText(db.userDao().getCurSaveId().get(0).HP.toString() + "x");
+
                 choice1t.startAnimation(anim_ext);
                 choice1.setClickable(false);
                 break;
@@ -135,6 +145,8 @@ public class MainGameActivity extends AppCompatActivity {
 
                 choice1t.startAnimation(anim_ext);
                 choice1t.setVisibility(View.INVISIBLE);
+
+                hp.setText(db.userDao().getCurSaveId().get(0).HP.toString() + "x");
 
                 choice2t.startAnimation(anim_ext);
 
@@ -214,6 +226,56 @@ public class MainGameActivity extends AppCompatActivity {
                 else
                     id++;
                 break;
+        }
+    }
+
+    public void ChangeHP(View v) {
+        switch (v.getId()) {
+            case (R.id.choice1):
+                if (id == 3 || id == 9 || id == 14 || id == 20) {
+                    save.HP += 1;
+                    db.userDao().update(save);
+                } else if (id == 12 || id == 22) {
+                    save.HP -= 1;
+                    db.userDao().update(save);
+                }
+                break;
+            case (R.id.choice2):
+                if (id == 3 || id == 8 || id == 15 || id == 20 || id == 23) {
+                    save.HP -= 1;
+                    db.userDao().update(save);
+                }
+                break;
+        }
+    }
+
+    public void EndOrDeath(View v) {
+        if (db.userDao().getCurSaveId().get(0).HP == 0) {
+            if (db.userDao().getCurSaveId().get(0).cur_id >= 11 && db.userDao().getCurSaveId().get(0).cur_id < 19) {
+                save.cur_id = 11;
+                save.HP = 2;
+                db.userDao().update(save);
+            } else if (db.userDao().getCurSaveId().get(0).cur_id >= 19 && db.userDao().getCurSaveId().get(0).cur_id < 27) {
+                save.cur_id = 19;
+                save.HP = 2;
+                db.userDao().update(save);
+            } else {
+                save.cur_id = 1;
+                save.HP = 3;
+                db.userDao().update(save);
+            }
+            intent.putExtra("end", "Вы погибли");
+            startActivity(intent);
+        }
+        if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "Ending")) {
+            save.cur_id = 1;
+            save.HP = 3;
+            db.userDao().update(save);
+            if (v.getId() == R.id.choice1)
+                intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications1.toString());
+            else if (v.getId() == R.id.choice2)
+                intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications2);
+            startActivity(intent);
         }
     }
 }
