@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eot1.entities.Save;
 
@@ -28,6 +29,7 @@ public class MainGameActivity extends AppCompatActivity {
     Handler handler = new Handler();
     MyDatabase db;
     Intent intent;
+    private static long back_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,15 +269,29 @@ public class MainGameActivity extends AppCompatActivity {
             intent.putExtra("end", "Вы погибли");
             startActivity(intent);
         }
+        save.cur_id = 1;
+        save.HP = 3;
+        db.userDao().update(save);
         if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "Ending")) {
-            save.cur_id = 1;
-            save.HP = 3;
-            db.userDao().update(save);
             if (v.getId() == R.id.choice1)
-                intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications1.toString());
+                intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications1);
             else if (v.getId() == R.id.choice2)
                 intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications2);
             startActivity(intent);
         }
+        if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "MaybeEnding") && (v.getId() == R.id.choice2)) {
+            intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications2);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else
+            Toast.makeText(getBaseContext(), "Press once again to exit!",
+                    Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
     }
 }
