@@ -4,62 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/da"
+    android:background="@drawable/menuback"
     tools:context=".MainActivity">
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/b_start2"
-        android:layout_width="172dp"
-        android:layout_height="73dp"
-        android:background="@drawable/button1"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:background="@drawable/btnmenu_8"
+        android:soundEffectsEnabled="false"
         android:text="Начать игру"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <Button
         android:id="@+id/b_contin"
-        android:layout_width="172dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="136dp"
-        android:background="@drawable/button1"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btnmenu_8"
+        android:soundEffectsEnabled="false"
         android:text="Продолжить"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/b_start2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <Button
         android:id="@+id/b_exit"
-        android:layout_width="172dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="56dp"
-        android:background="@drawable/button1"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btnmenu_8"
+        android:soundEffectsEnabled="false"
         android:text="Выход"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/b_contin"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.077" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
