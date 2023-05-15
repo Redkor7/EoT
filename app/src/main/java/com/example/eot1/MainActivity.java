@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 start.startAnimation(anim);
                 db.userDao().update(save);
                 startActivity(intent);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
         });
 
@@ -68,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 btnClick.start();
                 if (db.userDao().getCurSaveId().get(0).cur_id == 1)
                     Toast.makeText(getBaseContext(), "Сначала начните историю", Toast.LENGTH_LONG).show();
-                else
-                  startActivity(intent);
+                else {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.da, R.anim.d);
+                }
             }
         });
 

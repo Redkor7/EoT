@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eot1.entities.Save;
+
 public class EndOrDeath extends AppCompatActivity {
 
     Button start, menu;
     Intent intent, intent2;
     MyDatabase db;
     TextView endOrDeatht;
+    Save save = new Save();
     ConstraintLayout layout;
     MediaPlayer btnClick;
     private static long back_pressed;
@@ -47,11 +50,15 @@ public class EndOrDeath extends AppCompatActivity {
         if (db.userDao().getCurSaveId().get(0).HP == 2){
             layout.setBackgroundResource(R.drawable.death);
         }
+        else if (db.userDao().getCurSaveId().get(0).HP == 3){
+            layout.setBackgroundResource(R.drawable.end);
+        }
 
-        if (db.userDao().getCurSaveId().get(0).cur_id >= 11 && db.userDao().getCurSaveId().get(0).cur_id < 27)
+        if (db.userDao().getCurSaveId().get(0).HP == 2)
             start.setText("Продолжить с контрольной точки");
-        else
+        else {
             start.setText("Начать с начала");
+        }
 
         menu.setText("Выйти в меню");
 
@@ -60,6 +67,7 @@ public class EndOrDeath extends AppCompatActivity {
             public void onClick(View view) {
                 btnClick.start();
                 startActivity(intent2);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
         });
 
@@ -68,6 +76,7 @@ public class EndOrDeath extends AppCompatActivity {
             public void onClick(View view) {
                 btnClick.start();
                 startActivity(intent);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
         });
     }

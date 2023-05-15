@@ -26,7 +26,7 @@ public class MainGameActivity extends AppCompatActivity {
     ImageView textBack;
     Animation anim_emer, anim_ext;
     Save save = new Save();
-    Integer id, flag = 0, health, flag2 = 0;
+    Integer id, flag = 0, health;
     Handler handler = new Handler();
     MyDatabase db;
     Intent intent;
@@ -47,7 +47,7 @@ public class MainGameActivity extends AppCompatActivity {
         choice2 = findViewById(R.id.choice2);
         situation = findViewById(R.id.situation);
         hp = findViewById(R.id.hp);
-        layout = findViewById(R.id.mainGameL);
+        layout = findViewById(R.id.mainGameLa);
         textBack = findViewById(R.id.textback);
 
         intent = new Intent(this, EndOrDeath.class);
@@ -112,11 +112,11 @@ public class MainGameActivity extends AppCompatActivity {
                         choice1.startAnimation(anim_emer);
                         choice1.setClickable(true);
 
-                        if (flag2 == 0)
+                        if (id < 11)
                             choice1.setBackgroundResource(R.drawable.btnpres2);
-                        else if (flag2 == 1)
+                        else if (id >= 11 && id < 19)
                             choice1.setBackgroundResource(R.drawable.btnpast2);
-                        else if (flag2 == 2)
+                        else if (id >= 19)
                             choice1.setBackgroundResource(R.drawable.btnfut2);
                     }
                 }, 840);
@@ -142,11 +142,11 @@ public class MainGameActivity extends AppCompatActivity {
                         choice2.startAnimation(anim_emer);
                         choice2.setClickable(true);
 
-                        if (flag2 == 0)
+                        if (id < 11)
                             choice2.setBackgroundResource(R.drawable.btnpres2);
-                        else if (flag2 == 1)
+                        else if (id >= 11 && id < 19)
                             choice2.setBackgroundResource(R.drawable.btnpast2);
-                        else if (flag2 == 2)
+                        else if (id >= 19)
                             choice2.setBackgroundResource(R.drawable.btnfut2);
                     }
                 }, 840);
@@ -161,10 +161,6 @@ public class MainGameActivity extends AppCompatActivity {
     }
 
     public void ChangesEnd(View v) {
-        if (id >= 10)
-            flag2 = 1;
-        else if (id >= 18)
-            flag2 = 2;
         switch (v.getId()) {
             case (R.id.choice1):
                 this.flag = 0;
@@ -184,16 +180,17 @@ public class MainGameActivity extends AppCompatActivity {
                         choice2.startAnimation(anim_emer);
 
                         choice1.setClickable(true);
-                        if (id == 3)
+                        if (id == 3) {
                             layout.setBackgroundResource(R.drawable.backstreet);
-                        if (flag2 == 0) {
+                        }
+                        if (id < 11) {
                             choice1.setBackgroundResource(R.drawable.btnpres1);
                             choice2.setBackgroundResource(R.drawable.btnpres1);
-                        } else if (flag2 == 1) {
+                        } else if (id >= 11 && id < 19) {
                             choice1.setBackgroundResource(R.drawable.btnpast1);
                             choice2.setBackgroundResource(R.drawable.btnpast1);
                             layout.setBackgroundResource(R.drawable.backpast);
-                        } else if (flag2 == 2) {
+                        } else if (id >= 19) {
                             choice1.setBackgroundResource(R.drawable.btnfut1);
                             choice2.setBackgroundResource(R.drawable.btnfut1);
                         }
@@ -204,8 +201,9 @@ public class MainGameActivity extends AppCompatActivity {
                 choice1.setClickable(false);
                 choice2.setClickable(true);
 
-                if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "ChangeTime"))
+                if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "ChangeTime")) {
                     id = 11;
+                }
                 else
                     id++;
                 break;
@@ -230,22 +228,19 @@ public class MainGameActivity extends AppCompatActivity {
                         choice2.setClickable(true);
                         if (id == 3)
                             layout.setBackgroundResource(R.drawable.backstreet);
-                        if (flag2 == 0) {
+                        if (id < 11) {
                             choice1.setBackgroundResource(R.drawable.btnpres1);
                             choice2.setBackgroundResource(R.drawable.btnpres1);
-                        } else if (flag2 == 1) {
+                        } else if (id >= 11 && id < 19) {
                             choice1.setBackgroundResource(R.drawable.btnpast1);
                             choice2.setBackgroundResource(R.drawable.btnpast1);
-                        } else if (flag2 == 2) {
+                        } else if (id >= 19) {
                             choice1.setBackgroundResource(R.drawable.btnfut1);
                             choice2.setBackgroundResource(R.drawable.btnfut1);
                             layout.setBackgroundResource(R.drawable.backfutsvg);
                         }
                     }
                 }, 840);
-
-                situation.startAnimation(anim_ext);
-                textBack.startAnimation(anim_ext);
 
                 choice2.startAnimation(anim_ext);
 
@@ -301,6 +296,7 @@ public class MainGameActivity extends AppCompatActivity {
             }
             intent.putExtra("end", "Вы погибли");
             startActivity(intent);
+            overridePendingTransition(R.anim.da, R.anim.d);
         } else {
             save.cur_id = 1;
             save.HP = 3;
@@ -312,10 +308,12 @@ public class MainGameActivity extends AppCompatActivity {
                     intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications2);
 
                 startActivity(intent);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
             if (Objects.equals(db.userDao().getSituationById().get(id - 1).time, "MaybeEnding") && (v.getId() == R.id.choice2)) {
                 intent.putExtra("end", db.userDao().getSituationById().get(id - 1).implications2);
                 startActivity(intent);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
         }
     }
