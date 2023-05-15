@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     MyDatabase db;
     Animation anim;
+    MediaPlayer btnClick;
     private static long back_pressed;
 
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         save.id = 1;
         save.cur_id = 1;
         save.HP = 3;
+        btnClick = MediaPlayer.create(this, R.raw.soundbtn);
 
         db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
                 .createFromAsset("databases/base8.db")
@@ -51,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnClick.start();
                 start.startAnimation(anim);
                 db.userDao().update(save);
                 startActivity(intent);
+                overridePendingTransition(R.anim.da, R.anim.d);
             }
         });
 
@@ -61,16 +66,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 contin.startAnimation(anim);
+                btnClick.start();
                 if (db.userDao().getCurSaveId().get(0).cur_id == 1)
                     Toast.makeText(getBaseContext(), "Сначала начните историю", Toast.LENGTH_LONG).show();
-                else
-                  startActivity(intent);
+                else {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.da, R.anim.d);
+                }
             }
         });
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnClick.start();
                 exit.startAnimation(anim);
                 finishAffinity();
             }
@@ -81,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (back_pressed + 2000 > System.currentTimeMillis())
             finishAffinity();
-        else
-            Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
         back_pressed = System.currentTimeMillis();
     }
 }
