@@ -31,7 +31,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginTop="35dp"
         android:background="@drawable/btnpres1"
-        android:soundEffectsEnabled="true"
+        android:soundEffectsEnabled="false"
         android:textColor="#666188"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,7 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="140dp"
         android:background="@drawable/btnpres1"
-        android:soundEffectsEnabled="true"
+        android:soundEffectsEnabled="false"
         android:textColor="#666188"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,14 +110,12 @@
         android:id="@+id/hpchanges"
         android:layout_width="52dp"
         android:layout_height="39dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/uphp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textback"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.239" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
