@@ -41,7 +41,7 @@ public class EndOrDeath extends AppCompatActivity {
         menu = findViewById(R.id.b_menu);
         endOrDeatht = findViewById(R.id.endordeatht);
 
-        db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
+        db = Room.databaseBuilder(this, MyDatabase.class, "mydatabase1")
                 .createFromAsset("databases/base8.db")
                 .allowMainThreadQueries()
                 .build();

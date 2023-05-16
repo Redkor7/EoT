@@ -66,7 +66,7 @@ public class MainGameActivity extends AppCompatActivity {
         intent2 = new Intent(this, MainActivity.class);
         //btnClick = MediaPlayer.create(this, R.raw.btnsound);
 
-        db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
+        db = Room.databaseBuilder(this, MyDatabase.class, "mydatabase1")
                 .createFromAsset("databases/base8.db")
                 .allowMainThreadQueries()
                 .build();
@@ -390,5 +390,17 @@ public class MainGameActivity extends AppCompatActivity {
         situation.setText(db.userDao().getSituationById().get(id - 1).situation);
         choice1.setText(db.userDao().getSituationById().get(id - 1).choice1);
         choice2.setText(db.userDao().getSituationById().get(id - 1).choice2);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        backSong.pause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        backSong.start();
     }
 }

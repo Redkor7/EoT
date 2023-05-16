@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         save.id = 1;
         save.cur_id = 1;
         save.HP = 3;
-        db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
+        db = Room.databaseBuilder(this, MyDatabase.class, "mydatabase1")
                 .createFromAsset("databases/base8.db")
                 .allowMainThreadQueries()
                 .build();
