@@ -22,7 +22,7 @@ public class EndOrDeath extends AppCompatActivity {
     TextView endOrDeatht;
     Save save = new Save();
     ConstraintLayout layout;
-    MediaPlayer btnClick;
+    MediaPlayer deathSound, endSound;
     private static long back_pressed;
 
     @Override
@@ -34,7 +34,8 @@ public class EndOrDeath extends AppCompatActivity {
         intent2 = new Intent(this, MainGameActivity.class);
 
         layout = findViewById(R.id.endordeath);
-        btnClick = MediaPlayer.create(this, R.raw.soundbtn);
+        deathSound = MediaPlayer.create(this, R.raw.death);
+        endSound = MediaPlayer.create(this, R.raw.end);
 
         start = findViewById(R.id.b_start2);
         menu = findViewById(R.id.b_menu);
@@ -49,9 +50,11 @@ public class EndOrDeath extends AppCompatActivity {
 
         if (db.userDao().getCurSaveId().get(0).HP == 2){
             layout.setBackgroundResource(R.drawable.death);
+            deathSound.start();
         }
         else if (db.userDao().getCurSaveId().get(0).HP == 3){
             layout.setBackgroundResource(R.drawable.end);
+            endSound.start();
         }
 
         if (db.userDao().getCurSaveId().get(0).HP == 2)
@@ -65,7 +68,6 @@ public class EndOrDeath extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnClick.start();
                 startActivity(intent2);
                 overridePendingTransition(R.anim.da, R.anim.d);
             }
@@ -74,7 +76,6 @@ public class EndOrDeath extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnClick.start();
                 startActivity(intent);
                 overridePendingTransition(R.anim.da, R.anim.d);
             }

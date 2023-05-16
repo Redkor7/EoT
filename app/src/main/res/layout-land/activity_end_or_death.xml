@@ -10,31 +10,37 @@
 
   <Button
       android:id="@+id/b_start2"
-      android:layout_width="150dp"
-      android:layout_height="79dp"
+      android:layout_width="140dp"
+      android:layout_height="100dp"
       android:background="@drawable/btnmenu_8"
-      android:soundEffectsEnabled="false"
+      android:soundEffectsEnabled="true"
       android:text="Button"
+      android:textColor="#666188"
+      android:textSize="15sp"
+      android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.26"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.798" />
+      app:layout_constraintVertical_bias="0.862" />
 
   <Button
       android:id="@+id/b_menu"
-      android:layout_width="150dp"
-      android:layout_height="80dp"
+      android:layout_width="140dp"
+      android:layout_height="100dp"
       android:background="@drawable/btnmenu_8"
-      android:soundEffectsEnabled="false"
+      android:soundEffectsEnabled="true"
       android:text="Button"
+      android:textColor="#666188"
+      android:textSize="15sp"
+      android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.74"
+      app:layout_constraintHorizontal_bias="0.739"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.8" />
+      app:layout_constraintVertical_bias="0.861" />
 
   <ImageView
       android:id="@+id/imageView3"
@@ -52,9 +58,14 @@
       android:id="@+id/endordeatht"
       android:layout_width="499dp"
       android:layout_height="142dp"
+      android:elegantTextHeight="true"
       android:gravity="center"
       android:text="TextView"
+      android:textColor="#666188"
       android:textSize="12sp"
+      app:autoSizeMaxTextSize="34dp"
+      app:autoSizeMinTextSize="12dp"
+      app:autoSizeTextType="uniform"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

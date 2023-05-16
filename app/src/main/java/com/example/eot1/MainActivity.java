@@ -3,6 +3,8 @@ package com.example.eot1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     MyDatabase db;
     Animation anim;
-    MediaPlayer btnClick;
+
     private static long back_pressed;
 
     @Override
@@ -35,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         save.id = 1;
         save.cur_id = 1;
         save.HP = 3;
-        btnClick = MediaPlayer.create(this, R.raw.soundbtn);
-
         db = Room.databaseBuilder(this, MyDatabase.class, "my4db")
                 .createFromAsset("databases/base8.db")
                 .allowMainThreadQueries()
@@ -54,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnClick.start();
-                start.startAnimation(anim);
-                db.userDao().update(save);
-                startActivity(intent);
-                overridePendingTransition(R.anim.da, R.anim.d);
+                if (db.userDao().getCurSaveId().get(0).cur_id != 1)
+                    showAlertWithTwoButton();
+                else {
+                    start.startAnimation(anim);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.da, R.anim.d);
+                }
             }
         });
 
@@ -66,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 contin.startAnimation(anim);
-                btnClick.start();
                 if (db.userDao().getCurSaveId().get(0).cur_id == 1)
                     Toast.makeText(getBaseContext(), "Сначала начните историю", Toast.LENGTH_LONG).show();
                 else {
@@ -79,17 +80,40 @@ public class MainActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnClick.start();
                 exit.startAnimation(anim);
                 finishAffinity();
             }
         });
     }
 
+    public void showAlertWithTwoButton(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("Выбор есть всегда!")
+                .setMessage("Вы точно хотите начать сначала? Весь предыдущий прогресс не сохранится!")
+                .setPositiveButton("Начать сначала", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        start.startAnimation(anim);
+                        db.userDao().update(save);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.da, R.anim.d);
+
+                    }
+                })
+                .setNegativeButton("Лучше не буду начинать сначала", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setCancelable(true);
+        alertDialog.show();
+    }
+
     @Override
     public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
+        if (back_pressed + 3000 > System.currentTimeMillis()) {
             finishAffinity();
+        }
         back_pressed = System.currentTimeMillis();
     }
 }
