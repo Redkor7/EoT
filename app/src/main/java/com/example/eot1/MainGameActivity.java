@@ -104,6 +104,32 @@ public class MainGameActivity extends AppCompatActivity {
         });
     }
 
+    public void setStart() {
+        id = db.userDao().getCurSaveId().get(0).cur_id;
+        save.cur_id = db.userDao().getCurSaveId().get(0).cur_id;
+        save.id = 1;
+        health = db.userDao().getCurSaveId().get(0).HP;
+        save.HP = health;
+        hp.setText(save.HP.toString() + "x");
+
+        hpChangesImage.setVisibility(View.INVISIBLE);
+
+        if (db.userDao().getCurSaveId().get(0).cur_id >= 3 && db.userDao().getCurSaveId().get(0).cur_id < 11)
+            layout.setBackgroundResource(R.drawable.backstreet);
+        else if (db.userDao().getCurSaveId().get(0).cur_id >= 11 && db.userDao().getCurSaveId().get(0).cur_id < 19) {
+            layout.setBackgroundResource(R.drawable.backpast);
+            choice1.setBackgroundResource(R.drawable.btnpast1);
+            choice2.setBackgroundResource(R.drawable.btnpast1);
+        } else if (db.userDao().getCurSaveId().get(0).cur_id >= 19 && db.userDao().getCurSaveId().get(0).cur_id < 27) {
+            layout.setBackgroundResource(R.drawable.backfutsvg);
+            choice1.setBackgroundResource(R.drawable.btnfut1);
+            choice2.setBackgroundResource(R.drawable.btnfut1);
+        }
+        situation.setText(db.userDao().getSituationById().get(id - 1).situation);
+        choice1.setText(db.userDao().getSituationById().get(id - 1).choice1);
+        choice2.setText(db.userDao().getSituationById().get(id - 1).choice2);
+    }
+
     public void ChangesStart(View v) {
         switch (v.getId()) {
             case (R.id.choice1):
@@ -364,32 +390,6 @@ public class MainGameActivity extends AppCompatActivity {
             showAlertWithTwoButton();
         }
         back_pressed = System.currentTimeMillis();
-    }
-
-    public void setStart() {
-        id = db.userDao().getCurSaveId().get(0).cur_id;
-        save.cur_id = db.userDao().getCurSaveId().get(0).cur_id;
-        save.id = 1;
-        health = db.userDao().getCurSaveId().get(0).HP;
-        save.HP = health;
-        hp.setText(save.HP.toString() + "x");
-
-        hpChangesImage.setVisibility(View.INVISIBLE);
-
-        if (db.userDao().getCurSaveId().get(0).cur_id >= 3 && db.userDao().getCurSaveId().get(0).cur_id < 11)
-            layout.setBackgroundResource(R.drawable.backstreet);
-        else if (db.userDao().getCurSaveId().get(0).cur_id >= 11 && db.userDao().getCurSaveId().get(0).cur_id < 19) {
-            layout.setBackgroundResource(R.drawable.backpast);
-            choice1.setBackgroundResource(R.drawable.btnpast1);
-            choice2.setBackgroundResource(R.drawable.btnpast1);
-        } else if (db.userDao().getCurSaveId().get(0).cur_id >= 19 && db.userDao().getCurSaveId().get(0).cur_id < 27) {
-            layout.setBackgroundResource(R.drawable.backfutsvg);
-            choice1.setBackgroundResource(R.drawable.btnfut1);
-            choice2.setBackgroundResource(R.drawable.btnfut1);
-        }
-        situation.setText(db.userDao().getSituationById().get(id - 1).situation);
-        choice1.setText(db.userDao().getSituationById().get(id - 1).choice1);
-        choice2.setText(db.userDao().getSituationById().get(id - 1).choice2);
     }
 
     @Override
